@@ -56,7 +56,7 @@ node {
         }
     }
 
-    // TODO change Server to fae server
+    // TODO change Server to fae server.
     /* stage('Deploy') {
          docker.withServer('tcp://10.10.10.51:', 'fae-prod-certs') {
             docker.withRegistry('https://docker.nexus.archi-lab.io', 'archilab-nexus-jenkins') {
