@@ -1,0 +1,13 @@
+---
+server:
+  port: 8761
+
+logging:
+  level:
+    com.netflix.eureka: DEBUG
+    com.netflix.discovery: INFO
+    org.springframework.cloud: DEBUG
+
+spring:
+  profiles:
+    active: local

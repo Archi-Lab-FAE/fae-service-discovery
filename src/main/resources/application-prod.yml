@@ -1,0 +1,12 @@
+---
+spring:
+  application:
+    name: ${EUREKA_NAME}
+
+eureka:
+  instance:
+    hostname: ${EUREKA_NAME}
+  client:
+    serviceUrl:
+      defaultZone: http://${EUREKA_REDUNDANT}:8761/eureka/
+

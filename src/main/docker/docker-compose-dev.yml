@@ -1,0 +1,18 @@
+version: '3.4'
+
+services:
+  eureka-1:
+    image: docker.nexus.archi-lab.io/archilab/fae-service-discovery
+    environment:
+      - TZ=Europe/Berlin
+      - EUREKA_NAME=eureka-1
+      - SPRING_PROFILES_ACTIVE=dev
+    networks:
+      - discovery
+      - fae_backend
+    ports:
+      - 8761:8761
+networks:
+  discovery:
+  fae_backend:
+    external: true
