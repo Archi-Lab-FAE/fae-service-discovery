@@ -56,15 +56,14 @@ node {
         }
     }
 
-    stage('Deploy') {
-        // TODO change Server to fae server
-        /* docker.withServer('tcp://10.10.10.51:', 'fae-prod-certs') {
+    // TODO change Server to fae server
+    /* stage('Deploy') {
+         docker.withServer('tcp://10.10.10.51:', 'fae-prod-certs') {
             docker.withRegistry('https://docker.nexus.archi-lab.io', 'archilab-nexus-jenkins') {
                 sh "env IMAGE=${image} TAG=${changelist} docker stack deploy --with-registry-auth \
                     -c src/main/docker/docker-compose.yml \
                     -c src/main/docker/docker-compose-prod.yml ${image}"
             }
         }
-         */
-    }
+    }*/
 }
