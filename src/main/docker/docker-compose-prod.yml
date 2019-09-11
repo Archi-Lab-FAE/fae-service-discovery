@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   eureka-1:
-    image: docker.nexus.archi-lab.io/archilab/fae-service-discovery:${BUILD_ID}
+    image: docker.nexus.archi-lab.io/archilab/fae-service-discovery:${TAG}
     deploy:
       replicas: 1
       update_config:
@@ -23,7 +23,7 @@ services:
       - discovery
       - fae_backend
   eureka-2:
-    image: docker.nexus.archi-lab.io/archilab/fae-service-discovery:${BUILD_ID}
+    image: docker.nexus.archi-lab.io/archilab/fae-service-discovery:${TAG}
     deploy:
       replicas: 1
       update_config:
