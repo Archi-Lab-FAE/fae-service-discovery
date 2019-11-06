@@ -1,13 +1,20 @@
 #!/usr/bin/env bash
-CURRENT=$(pwd)
 
-# pull service
+CURRENT="$(
+  cd "$(dirname "$0")"
+  pwd
+)"
+
+# Create network
+docker network inspect fae_backend &>/dev/null || docker network create fae_backend
+
+# Pull service
 docker-compose \
   -f "$CURRENT/src/main/docker/docker-compose.yml" \
   -f "$CURRENT/src/main/docker/docker-compose-dev.yml" \
   pull
-  
-# start service
+
+# Start service
 docker-compose -p discovery \
   -f "$CURRENT/src/main/docker/docker-compose.yml" \
   -f "$CURRENT/src/main/docker/docker-compose-dev.yml" \
