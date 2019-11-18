@@ -1,4 +1,4 @@
-version: '3.4'
+version: "3.7"
 
 services:
   eureka-1:
@@ -22,6 +22,7 @@ services:
     networks:
       - discovery
       - fae_backend
+
   eureka-2:
     image: docker.nexus.archi-lab.io/archilab/fae-service-discovery:${TAG}
     deploy:
@@ -43,6 +44,7 @@ services:
     networks:
       - discovery
       - fae_backend
+
 networks:
   discovery:
   fae_backend:

@@ -1,4 +1,4 @@
-version: '3.4'
+version: "3.7"
 
 services:
   eureka-1:
@@ -12,6 +12,7 @@ services:
       - fae_backend
     ports:
       - 8761:8761
+
 networks:
   discovery:
   fae_backend:
