@@ -1,13 +1,25 @@
 node {
-    def changelist = "${env.BUILD_NUMBER}"
-    def pom
+    def revision
+    def changelist
+
+    def repository
     def image
+    def tag
+
+    def server = 'tcp://10.10.10.61:2376'
+    def certs = 'fae-ws2019-certs'
 
     stage('Checkout') {
         checkout scm
 
-        pom = readMavenPom file: 'pom.xml'
+        def pom = readMavenPom()
+
+        revision = pom.getProperties().getProperty('revision')
+        changelist = "${env.BUILD_NUMBER}"
+
+        repository = pom.getProperties().getProperty('docker.image.prefix')
         image = pom.getArtifactId()
+        tag = changelist
     }
 
     docker.image('maven:3.6.1-jdk-8-alpine').inside {
@@ -57,11 +69,14 @@ node {
     }
 
     stage('Deploy') {
-        docker.withServer('tcp://10.10.10.61:2376', 'fae-ws2019-certs') {
+        docker.withServer(server, certs) {
             docker.withRegistry('https://docker.nexus.archi-lab.io', 'archilab-nexus-jenkins') {
-                sh "env IMAGE=${image} TAG=${changelist} docker stack deploy --with-registry-auth \
+                sh "env REPOSITORY=${repository} IMAGE=${image} TAG=${tag} \
+                    docker stack deploy \
+                    --with-registry-auth \
                     -c src/main/docker/docker-compose.yml \
-                    -c src/main/docker/docker-compose-prod.yml ${image}"
+                    -c src/main/docker/docker-compose.prod.yml \
+                    ${image}"
             }
         }
     }
