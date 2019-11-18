@@ -8,7 +8,7 @@ CURRENT="$(
 # Stop service
 docker-compose -p discovery \
   -f "$CURRENT/src/main/docker/docker-compose.yml" \
-  -f "$CURRENT/src/main/docker/docker-compose-dev.yml" \
+  -f "$CURRENT/src/main/docker/docker-compose.dev.yml" \
   down
 
 # Remove network
